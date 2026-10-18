@@ -4,7 +4,7 @@ App Android para elegir, planificar y preparar rutas de senderismo familiares po
 
 ## Fase 1 (esta versión)
 
-- Catálogo de 12 rutas con filtros (desde Sevilla o El Puerto, aptas para carrito, recorrido máximo).
+- Catálogo de 17 rutas en Sevilla, Cádiz y Huelva con filtros (provincia, desde Sevilla o El Puerto, aptas para carrito, recorrido máximo).
 - Ficha de cada ruta: recorrido propuesto, duración a ritmo familiar, avisos, cómo llegar y ficha oficial.
 - Planificador: día, hora de salida, coche y horario completo con aviso de siesta (14:30).
 - Previsión del tiempo de la zona (Open-Meteo) con avisos de calor, lluvia, viento y frío.

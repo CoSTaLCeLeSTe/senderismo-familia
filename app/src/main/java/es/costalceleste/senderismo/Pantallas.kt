@@ -219,12 +219,14 @@ fun Titulo(texto: String) {
 
 @Composable
 fun RutasScreen(onOpen: (String) -> Unit) {
+    var provincia by rememberSaveable { mutableStateOf<String?>(null) }
     var base by rememberSaveable { mutableStateOf<String?>(null) }
     var soloCarrito by rememberSaveable { mutableStateOf(false) }
     var maxKm by rememberSaveable { mutableStateOf(15f) }
 
     val lista = RUTAS.filter { r ->
-        (base == null || r.bases.any { it.name == base }) &&
+        (provincia == null || r.provincia.name == provincia) &&
+            (base == null || r.bases.any { it.name == base }) &&
             (!soloCarrito || r.modo != Modo.MOCHILA) &&
             r.km <= maxKm
     }
@@ -244,7 +246,17 @@ fun RutasScreen(onOpen: (String) -> Unit) {
                 )
                 Spacer(Modifier.height(12.dp))
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    FilterChip(selected = base == null, onClick = { base = null }, label = { Text("Todas") })
+                    FilterChip(selected = provincia == null, onClick = { provincia = null }, label = { Text("Todas las provincias") })
+                    Provincia.entries.forEach { p ->
+                        FilterChip(
+                            selected = provincia == p.name,
+                            onClick = { provincia = p.name },
+                            label = { Text(p.label) },
+                        )
+                    }
+                }
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(selected = base == null, onClick = { base = null }, label = { Text("Cualquier origen") })
                     Base.entries.forEach { b ->
                         FilterChip(
                             selected = base == b.name,
@@ -290,6 +302,7 @@ fun RutaCard(r: Ruta, onClick: () -> Unit) {
             Text(r.zona, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(10.dp))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Etiqueta(r.provincia.label)
                 Etiqueta("${fmtKm(r.km)} km")
                 Etiqueta(fmtDur(r.duracionMin()))
                 Etiqueta(r.modo.label)
