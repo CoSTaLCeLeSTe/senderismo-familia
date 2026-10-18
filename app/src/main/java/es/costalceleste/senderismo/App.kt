@@ -179,14 +179,14 @@ fun Celebracion(logros: List<Logro>, onCerrar: () -> Unit) {
     var visible by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { visible = true }
     val escala by animateFloatAsState(
-        targetValue = if (visible) 1f else 0.2f,
+        targetValue = if (visible) 1f else 0.6f,
         animationSpec = spring(dampingRatio = 0.45f, stiffness = Spring.StiffnessLow),
         label = "medallas",
     )
     Dialog(onDismissRequest = onCerrar) {
         Surface(shape = RoundedCornerShape(32.dp), color = Color.White) {
             Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                Text("🎉", fontSize = 48.sp, modifier = Modifier.scale(escala))
+                Text("🎊  🎉  🎊", fontSize = 40.sp, modifier = Modifier.scale(escala))
                 Spacer(Modifier.height(8.dp))
                 Text(
                     if (logros.size == 1) "¡Nuevo logro!" else "¡${logros.size} logros nuevos!",
