@@ -31,23 +31,23 @@ fun nuevoPlan(ruta: Ruta): Plan {
 
 fun checklistPara(fecha: LocalDate): List<String> {
     val basicos = listOf(
-        "Mochila portabebés",
-        "Agua (1,5 L por adulto)",
-        "Agua y vaso del peque",
-        "Comida y snacks",
-        "Pañales y toallitas",
-        "Cambio de ropa del peque",
-        "Crema solar",
-        "Gorras",
-        "Botiquín",
-        "Móvil cargado y batería externa",
-        "Bolsa para la basura",
-        "Chupete o muñeco favorito",
+        "🎒 Mochila portabebés",
+        "💧 Agua (1,5 L por adulto)",
+        "🍼 Agua y vaso del peque",
+        "🥪 Comida y snacks",
+        "🧷 Pañales y toallitas",
+        "👕 Cambio de ropa del peque",
+        "🧴 Crema solar",
+        "🧢 Gorras",
+        "🩹 Botiquín",
+        "🔋 Móvil cargado y batería externa",
+        "🗑️ Bolsa para la basura",
+        "🧸 Chupete o muñeco favorito",
     )
     val temporada = when (fecha.monthValue) {
-        in 6..9 -> listOf("Agua extra por el calor", "Gorra con cubrenuca para el peque", "Repelente de mosquitos")
-        11, 12, 1, 2, 3 -> listOf("Capa impermeable", "Abrigo o funda de la mochila", "Calcetines de repuesto")
-        else -> listOf("Chubasquero ligero")
+        in 6..9 -> listOf("💦 Agua extra por el calor", "👒 Gorra con cubrenuca para el peque", "🦟 Repelente de mosquitos")
+        11, 12, 1, 2, 3 -> listOf("🧥 Capa impermeable", "🧣 Abrigo o funda de la mochila", "🧦 Calcetines de repuesto")
+        else -> listOf("🌂 Chubasquero ligero")
     }
     return basicos + temporada
 }

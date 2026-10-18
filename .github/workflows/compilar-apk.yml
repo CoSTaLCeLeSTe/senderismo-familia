@@ -30,12 +30,20 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace --no-daemon 2>&1 | tee build.log
 
+      # Capturas de pantalla con Paparazzi para revisar el diseño (no bloquea la APK).
+      - name: Capturas de pantalla
+        if: success()
+        continue-on-error: true
+        run: bash ci/capturas.sh 2>&1 | tee capturas.log
+
       # Deja el log (y la APK si existe) en la rama "build" para poder revisar cada compilación.
       - name: Publicar resultado en la rama build
         if: always()
         run: |
-          mkdir -p out
+          mkdir -p out/capturas
           cp build.log out/build.log 2>/dev/null || echo "sin log" > out/build.log
+          cp capturas.log out/capturas.log 2>/dev/null || true
+          cp app/src/test/snapshots/images/*.png out/capturas/ 2>/dev/null || true
           cp app/build/outputs/apk/debug/app-debug.apk out/senderismo-familia.apk 2>/dev/null || true
           echo "commit=${GITHUB_SHA} estado=${{ job.status }} version=${GITHUB_RUN_NUMBER}" > out/STATUS
           cd out
